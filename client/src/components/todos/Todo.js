@@ -1,20 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
+import {deleteTodo} from '../../actions/index';
 
 import Button from '@material-ui/core/Button';
 
 
-const Todo = (props) => {
-  console.log("From Todo  ", props)
-  return (
-    <div>
-      <h3>{props.title}</h3>
-      <p>{props.body}</p>
-      <Button variant='contained' color='secondary'>Delete</Button>
-    </div>
-  );
+class Todo extends Component {
+
+  removeOne = () => {
+    this.props.deleteTodo(this.props._id)
+  }
+
+  render() {
+    // console.log("From Todo  ", this.props)
+    // console.log("From Todo  ", this.props)
+    // console.log(this.props._id)
+    return (
+      <div>
+        <h3>{this.props.title}</h3>
+        <p>{this.props.body}</p>
+        <Button variant='contained' color='secondary' onClick={() => this.removeOne()}>Delete</Button>
+      </div>
+    );
+  }
 }
 
 
-
-export default Todo;
+export default connect(null, {deleteTodo})(Todo);
