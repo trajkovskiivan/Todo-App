@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {fetchUser} from '../../actions'
+import {fetchUser} from '../../actions';
+
+import TodoList from './TodoList';
 
 
 
@@ -10,7 +12,6 @@ class UserShow extends Component {
 
 
   componentDidMount() {
-    // console.log(this.props)
     this.props.fetchUser();
   }
 
@@ -19,6 +20,7 @@ class UserShow extends Component {
     return (
       <div >
         <h1>Wellcome {this.props.user.firstName} {this.props.user.lastName}</h1>
+        <TodoList />
       </div>
     );
   }
@@ -26,7 +28,9 @@ class UserShow extends Component {
 
 const mapStateToProps = (state) => {
   // console.log(state);
-  return state
+  return {
+    user: state.user
+  }
 }
 
 export default connect(mapStateToProps, {fetchUser})(UserShow);
