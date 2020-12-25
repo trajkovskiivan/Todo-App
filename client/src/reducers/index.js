@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
-
+// eslint-disable-next-line
 import {reducer as formReducer} from 'redux-form';
-import userReducer from './userReducer'
+import userReducer from './userReducer';
+import authReducer from './authReducer';
 
 export default combineReducers({
   tryMe: () => {return 'Try Me'},
-  user: userReducer
+  user: userReducer,
+  auth: authReducer
 })

@@ -38,7 +38,11 @@ const corsOptions = {
   optionSuccessStatus: 200,
   methods: "GET, PUT, DELETE"
 };
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
+
+let isLoggedIn = null;
+let theFirstName = "";
+let id = "";
 
 
 app.get('/another-todos', (req, res) => {
@@ -50,7 +54,27 @@ app.get('/another-todos', (req, res) => {
 
 app.get('/', (req, res) => {
   res.redirect('/todos');
+});
+
+app.get('/all', (req, res) => {
+  User.find().then(result => {
+    console.log(result);
+    res.send(result)
+  })
 })
+
+app.get('/auth', (req, res) => {
+  const {email, password} = req.body;
+  User.find({email: email, password: password}).then(result => {
+    console.log(result[0].firstName);
+    console.log(result[0]._id.toString());
+    theFirstName = result[0].firstName;
+    id = result[0]._id.toString();
+    res.send(result)
+  })
+});
+
+
 app.get('/todos', (req, res) => {
   // res.header("Access-Control-Allow-Origin", "GET");
   User.findOne({firstName: "John"}).then((record) => {

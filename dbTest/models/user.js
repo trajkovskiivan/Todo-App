@@ -15,6 +15,8 @@ const todoSchema = new Schema({
 const userSchema = new Schema({
   firstName: String,
   lastName: String,
+  email: String,
+  password: String,
   age: Number,
   userId: String,
   todos: [todoSchema]

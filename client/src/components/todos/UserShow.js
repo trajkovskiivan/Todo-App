@@ -20,7 +20,6 @@ class UserShow extends Component {
     // console.log(this.props.user)
     return (
       <div >
-        <h1>Wellcome {this.props.user.firstName} {this.props.user.lastName}</h1>
         <TodoInput />
         <TodoList />
       </div>

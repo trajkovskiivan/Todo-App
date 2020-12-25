@@ -14,6 +14,8 @@ describe('First connection ever', (done) => {
   //   let user = new User({
   //     firstName: 'John',
   //     lastName: 'Doe',
+  //     email: 'test@test.com',
+  //     password: 'test',
   //     age: 30,
   //     userId: 'specialId',
   //     todos: [{title: 'First ToDo', body: 'Make this App work...'}]
@@ -39,19 +41,19 @@ describe('First connection ever', (done) => {
   //   })
   // })
 
-  it('Finding a user, and then adding a todo', (done) => {
-    User.findOne({firstName: userName}).then(record => {
-      console.log(record.todos);
-      record.todos = [...record.todos, anotherTodo];
-      record.save().then((res) => {
-        User.findOne({firstName: userName}).then((record) => {
-          console.log(record.todos);
-          assert(record.todos.length > 3);
-          done();
-        });
-      });
-    });
-  });
+  // it('Finding a user, and then adding a todo', (done) => {
+  //   User.findOne({firstName: userName}).then(record => {
+  //     console.log(record.todos);
+  //     record.todos = [...record.todos, anotherTodo];
+  //     record.save().then((res) => {
+  //       User.findOne({firstName: userName}).then((record) => {
+  //         console.log(record.todos);
+  //         assert(record.todos.length > 3);
+  //         done();
+  //       });
+  //     });
+  //   });
+  // });
 
   // done()
 
