@@ -18,6 +18,7 @@ class Auth extends Component {
     } else {
       return (
         < React.Fragment >
+          <h4>Here will be the inputs</h4>
           <Button variant='contained' color='secondary' onClick={this.props.logIn}>Log In</Button>
         </React.Fragment >
       )
