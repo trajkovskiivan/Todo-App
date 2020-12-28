@@ -44,9 +44,13 @@ export const postTodo = (email, title, body) => async dispatch => {
   dispatch({type: POST_TODO, payload: response.data});
 }
 
+
+
 export const deleteTodo = (id) => async dispatch => {
+  console.log('delete id', id)
   const email = localStorage.getItem('email');
   const response = await todos.delete(`/user/todos/${email}/${id}`, {email, id});
   dispatch({type: DELETE_TODO, payload: response.data});
 };
+
 
