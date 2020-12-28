@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const morgan = require("morgan")
+const morgan = require("morgan");
+
+const userRoutes = require("./routes/user.router");
 
 const User = require("./models/user.model");
 
@@ -43,11 +45,6 @@ app.use(cors(corsOptions));
 
 
 
-app.get('/another-todos', (req, res) => {
-  User.findOne({firstName: "John"}).then((record) => {
-    res.json(record)
-  })
-});
 
 app.get('/', (req, res) => {
   res.redirect('/auth');
@@ -70,6 +67,12 @@ app.post('/auth', (req, res) => {
 
 
 
+
+// user routes
+app.use("/user", userRoutes);
+
+/*
+
 // fetch user with todos
 app.get('/user/:email', (req, res) => {
   console.log('You Reached the /user')
@@ -80,7 +83,7 @@ app.get('/user/:email', (req, res) => {
 
 
 // for testing just to get the correct todo
-app.get('/user/todos/:id', (req, res) => {
+app.get('/user/todo/:id', (req, res) => {
   // res.header("Access-Control-Allow-Origin", "GET");
   User.findOne({firstName: "John"}).then((record) => {
     const {todos} = record;
@@ -121,4 +124,4 @@ app.delete('/user/delete/todo/:email/:id', (req, res) => {
   })
 })
 
-
+*/
