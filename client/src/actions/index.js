@@ -20,7 +20,6 @@ export const logIn = (email, password) => async dispatch => {
     localStorage.setItem('email', response.data.email.toString());
     dispatch({type: LOG_IN, payload: response.data})
   }
-
 };
 
 export const logOut = (userId) => {
@@ -40,7 +39,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const postTodo = (email, title, body) => async dispatch => {
-  const response = await todos.post('/user/todo', {email, title, body});
+  const response = await todos.post('/user/post/todo', {email, title, body});
   dispatch({type: POST_TODO, payload: response.data});
 }
 
@@ -49,7 +48,7 @@ export const postTodo = (email, title, body) => async dispatch => {
 export const deleteTodo = (id) => async dispatch => {
   console.log('delete id', id)
   const email = localStorage.getItem('email');
-  const response = await todos.delete(`/user/todos/${email}/${id}`, {email, id});
+  const response = await todos.delete(`/user/delete/todo/${email}/${id}`, {email, id});
   dispatch({type: DELETE_TODO, payload: response.data});
 };
 

@@ -7,6 +7,16 @@ const assert = require("assert");
 const userName = 'John';
 const anotherTodo = {title: 'This is the second todo', body: 'We are making sure that the update works'};
 
+let user = new User({
+  firstName: 'Dave',
+  lastName: 'Moon',
+  email: 'test2@test.com',
+  password: 'test',
+  age: 40,
+  userId: 'specialId',
+  todos: [{title: 'First ToDo for Dave', body: 'Make this App work...'}]
+});
+
 
 describe('First connection ever', (done) => {
 
@@ -54,6 +64,39 @@ describe('First connection ever', (done) => {
   //     });
   //   });
   // });
+
+
+  // it('Finding user', (done) => {
+  //   User.findOne({email: 'test@test.com'}).then(record => {
+  //     if (!record) {
+  //       console.log('User does exist  ', record.firstName)
+  //     }
+  //     assert(record);
+  //     done();
+  //   }).catch(error => {
+  //     console.log('User does not exist', error.generatedMessage);
+  //     User.createUser()
+  //     done();
+  //   })
+  // })
+
+
+  // it('Checking user, if !user, create user', (done) => {
+  //   User.findOne({email: 'test2@test.com'}).then(record => {
+  //     if (!record) {
+  //       console.log('User does not exist  ')
+  //       console.log('Creating User');
+  //       console.log(user)
+  //       user.save().then(result => {
+  //         assert(user.email === result.email)
+  //         done()
+  //       })
+  //     }
+  //   }).catch(error => {
+  //     console.log('User does exist');
+  //     done();
+  //   })
+  // })
 
   // done()
 

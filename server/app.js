@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const morgan = require("morgan")
 
-const User = require("./models/user");
+const User = require("./models/user.model");
 
 const app = express();
 const port = 8080;
@@ -69,6 +69,8 @@ app.post('/auth', (req, res) => {
 });
 
 
+
+// fetch user with todos
 app.get('/user/:email', (req, res) => {
   console.log('You Reached the /user')
   User.findOne({email: req.params.email}).then(record => {
@@ -92,8 +94,8 @@ app.get('/user/todos/:id', (req, res) => {
 });
 
 
-
-app.post('/user/todo', (req, res) => {
+// post todo
+app.post('/user/post/todo', (req, res) => {
   const {email, title, body} = req.body
   let obj = {title, body}
   User.findOne({email: email}).then(record => {
@@ -105,8 +107,8 @@ app.post('/user/todo', (req, res) => {
 });
 
 
-
-app.delete('/user/todos/:email/:id', (req, res) => {
+// delete todo
+app.delete('/user/delete/todo/:email/:id', (req, res) => {
   console.log(req.params);
   User.findOne({email: req.params.email}).then(record => {
     const altered = record.todos.filter(todo => todo._id.toString() !== req.params.id);

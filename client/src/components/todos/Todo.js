@@ -1,6 +1,10 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 
+
+
+// eslint-disable-next-line
+import {connect} from 'react-redux';
+// eslint-disable-next-line
 import {deleteTodo} from '../../actions/index';
 
 import Button from '@material-ui/core/Button';
@@ -26,12 +30,10 @@ export default Todo;
 
 
 
-// class Todo extends Component {
-
+// class Todo extends React.Component {
 //   removeOne = () => {
 //     this.props.deleteTodo(this.props._id)
 //   }
-
 //   render() {
 //     return (
 //       <div>
@@ -42,7 +44,4 @@ export default Todo;
 //     );
 //   }
 // }
-
-
-
 // export default connect(null, {deleteTodo})(Todo);
