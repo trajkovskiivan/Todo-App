@@ -36,53 +36,49 @@ app.use(morgan('dev'));
 const corsOptions = {
   origin: 'http://localhost:3000',
   optionSuccessStatus: 200,
-  methods: "GET, PUT, DELETE"
+  methods: "GET, POST, PUT, DELETE"
 };
 app.use(cors(corsOptions));
 
-let isLoggedIn = null;
-let theFirstName = "";
-let id = "";
+
 
 
 app.get('/another-todos', (req, res) => {
-  // res.header("Access-Control-Allow-Origin", "GET");
   User.findOne({firstName: "John"}).then((record) => {
     res.json(record)
   })
 });
 
 app.get('/', (req, res) => {
-  res.redirect('/todos');
+  res.redirect('/auth');
 });
 
 app.get('/all', (req, res) => {
   User.find().then(result => {
-    console.log(result);
     res.send(result)
   })
 })
 
-app.get('/auth', (req, res) => {
+app.post('/auth', (req, res) => {
   const {email, password} = req.body;
-  User.find({email: email, password: password}).then(result => {
-    console.log(result[0].firstName);
-    console.log(result[0]._id.toString());
-    theFirstName = result[0].firstName;
-    id = result[0]._id.toString();
-    res.send(result)
+  console.log(req.body)
+  console.log(email, password)
+  User.findOne({email: email, password: password}).then((record) => {
+    res.send(record)
   })
 });
 
 
-app.get('/todos', (req, res) => {
-  // res.header("Access-Control-Allow-Origin", "GET");
-  User.findOne({firstName: "John"}).then((record) => {
-    res.json(record)
+app.get('/user/:email', (req, res) => {
+  console.log('You Reached the /user')
+  User.findOne({email: req.params.email}).then(record => {
+    res.send(record)
   })
 });
 
-app.get('/todos/:id', (req, res) => {
+
+// for testing just to get the correct todo
+app.get('/user/todos/:id', (req, res) => {
   // res.header("Access-Control-Allow-Origin", "GET");
   User.findOne({firstName: "John"}).then((record) => {
     const {todos} = record;
@@ -95,24 +91,24 @@ app.get('/todos/:id', (req, res) => {
   })
 });
 
-app.post('/todo', (req, res) => {
-  User.findOne({firstName: "John"}).then(record => {
-    console.log(record.todos);
-    record.todos.push(req.body)
-    record.save().then((result) => {
+
+
+app.post('/user/todo', (req, res) => {
+  const {email, title, body} = req.body
+  let obj = {title, body}
+  User.findOne({email: email}).then(record => {
+    record.todos.push(obj);
+    record.save().then(result => {
       res.send(result)
     });
-
-  })
-  // console.log(req.body)
-  // res.json(req.body)
-})
+  });
+});
 
 
 
-app.delete('/todos/:id', (req, res) => {
+app.delete('/user/todos/:email/:id', (req, res) => {
   console.log(req.params);
-  User.findOne({firstName: "John"}).then(record => {
+  User.findOne({email: req.params.email}).then(record => {
     const altered = record.todos.filter(todo => todo._id.toString() !== req.params.id);
     record.todos = altered;
 

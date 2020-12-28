@@ -6,6 +6,6 @@ import authReducer from './authReducer';
 
 export default combineReducers({
   tryMe: () => {return 'Try Me'},
-  user: userReducer,
-  auth: authReducer
+  auth: authReducer,
+  user: userReducer
 })

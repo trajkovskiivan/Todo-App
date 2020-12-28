@@ -1,7 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {fetchUser} from '../actions/index';
+
 import UserShow from './todos/UserShow';
+// eslint-disable-next-line
 import Button from '@material-ui/core/Button';
 import './App.css'
 
@@ -19,13 +22,11 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('User is logged in ', this.props.auth.isLoggedIn)
     return (
       <div>
         <h1>Todo-App</h1>
         <Auth />
         {this.renderApp()}
-        <Button variant='contained' color='primary'>Click Me</Button>
       </div>
     );
   }
@@ -38,4 +39,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {fetchUser})(App);

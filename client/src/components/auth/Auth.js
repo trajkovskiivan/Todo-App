@@ -14,6 +14,9 @@ class Auth extends Component {
       password: ""
     }
   }
+
+
+
   handleInput = (event) => {
     event.preventDefault();
     this.setState({
@@ -21,11 +24,19 @@ class Auth extends Component {
     })
   }
 
+  handlePost = async () => {
+    this.props.logIn(this.state.email, this.state.password);
+    this.setState({
+      email: "",
+      password: ""
+    })
+  }
+
   renderAuth = (status) => {
     if (status) {
       return (
         < React.Fragment >
-          <h4>Wellcome {this.props.user.firstName} {this.props.user.lastName}</h4>
+          {/* <h4>Wellcome {this.props.user.firstName} {this.props.user.lastName}</h4> */}
           <Button variant='contained' color='secondary' onClick={this.props.logOut}>Log Out</Button>
         </React.Fragment>
       )
@@ -34,6 +45,7 @@ class Auth extends Component {
         < React.Fragment >
           <TextField
             name="email"
+            value={this.state.email}
             type="email"
             id="outlined-basic"
             label="e-mail"
@@ -43,6 +55,7 @@ class Auth extends Component {
           />
           <TextField
             id="outlined-password-input"
+            value={this.state.password}
             name="password"
             label="Password"
             type="password"
@@ -50,7 +63,7 @@ class Auth extends Component {
             variant="outlined"
             onChange={(e) => this.handleInput(e)}
           />
-          <Button variant='contained' color='secondary' onClick={this.props.logIn}>Log In</Button>
+          <Button variant='contained' color='secondary' onClick={() => this.handlePost()}>Log In</Button>
         </React.Fragment >
       )
     }
@@ -58,7 +71,7 @@ class Auth extends Component {
 
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <div>
         {this.renderAuth(this.props.auth.isLoggedIn)}
@@ -69,6 +82,7 @@ class Auth extends Component {
 };
 
 const mapStateToProps = (state) => {
+  // console.log(state.auth)
   return {
     user: state.user,
     auth: state.auth

@@ -10,14 +10,14 @@ import App from './components/App';
 import reducers from './reducers'
 
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+// eslint-disable-next-line
 const logger = createLogger({
   // ...options
 });
 
 const store = createStore(
   reducers,
-  composeEnchancers(applyMiddleware(thunk, logger))
+  composeEnchancers(applyMiddleware(thunk))
 );
 
 ReactDOM.render(

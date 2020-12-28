@@ -12,7 +12,7 @@ class TodoInput extends Component {
     super(props);
     this.state = {
       title: "",
-      body: ""
+      body: "",
     }
   }
 
@@ -24,7 +24,8 @@ class TodoInput extends Component {
   }
 
   handlePost = async () => {
-    this.props.postTodo(this.state.title, this.state.body);
+
+    this.props.postTodo(this.props.user.email, this.state.title, this.state.body);
     this.setState({
       title: "",
       body: ""
@@ -33,7 +34,6 @@ class TodoInput extends Component {
 
 
   render() {
-    console.log('From the input', this.props)
     return (
       <div>
         <h4>TodoInput</h4>
@@ -68,6 +68,13 @@ class TodoInput extends Component {
       </div>
     );
   }
+};
+
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
 }
 
-export default connect(null, {postTodo})(TodoInput);
+export default connect(mapStateToProps, {postTodo})(TodoInput);

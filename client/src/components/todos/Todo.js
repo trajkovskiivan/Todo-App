@@ -13,9 +13,6 @@ class Todo extends Component {
   }
 
   render() {
-    // console.log("From Todo  ", this.props)
-    // console.log("From Todo  ", this.props)
-    // console.log(this.props._id)
     return (
       <div>
         <h3>{this.props.title}</h3>
@@ -25,6 +22,7 @@ class Todo extends Component {
     );
   }
 }
+
 
 
 export default connect(null, {deleteTodo})(Todo);
