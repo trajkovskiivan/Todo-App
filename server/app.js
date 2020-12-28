@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
 const userRoutes = require("./routes/user.router");
+const authRoutes = require("./routes/auth.router");
 
 const User = require("./models/user.model");
 
@@ -53,24 +54,70 @@ app.get('/', (req, res) => {
 app.get('/all', (req, res) => {
   User.find().then(result => {
     res.send(result)
-  })
-})
-
-app.post('/auth', (req, res) => {
-  const {email, password} = req.body;
-  console.log(req.body)
-  console.log(email, password)
-  User.findOne({email: email, password: password}).then((record) => {
-    res.send(record)
-  })
+  });
 });
 
 
 
 
+// auth routes
+app.use('/auth', authRoutes);
 // user routes
 app.use("/user", userRoutes);
 
+
+
+
+
+
+
+
+
+
+
+
+
+// auth routes
+/*
+// authenticate user
+app.post('/auth/get', (req, res) => {
+  const {email, password} = req.body;
+  console.log(req.body);
+  console.log(email, password);
+  User.findOne({email: email, password: password}).then((record) => {
+    res.send(record);
+  });
+});
+// create user
+app.post('/auth/create', (req, res) => {
+  // console.log(req.body);
+  const {email} = req.body;
+  // res.send(req.body)
+  User.findOne({email: email}).then(record => {
+    if (record) {
+      let status = false;
+      res.send(status);
+    } else {
+      let user = new User(req.body);
+      user.save().then(record => {
+        console.log(`User ${record.firstName} is saved`)
+        res.send(record)
+      });
+    };
+  });
+});
+// delete user
+app.delete('/auth/delete/:email/:password', (req, res) => {
+  console.log(req.params)
+  const {email, password} = req.params;
+  User.findOneAndDelete({email: email, password: password}).then(result => {
+    console.log(result)
+    res.send({message: `User ${result.firstName} has been deleted`, status: true});
+  });
+});
+*/
+
+// user routes
 /*
 
 // fetch user with todos
@@ -80,8 +127,6 @@ app.get('/user/:email', (req, res) => {
     res.send(record)
   })
 });
-
-
 // for testing just to get the correct todo
 app.get('/user/todo/:id', (req, res) => {
   // res.header("Access-Control-Allow-Origin", "GET");
@@ -95,8 +140,6 @@ app.get('/user/todo/:id', (req, res) => {
     res.json(realSlimShady);
   })
 });
-
-
 // post todo
 app.post('/user/post/todo', (req, res) => {
   const {email, title, body} = req.body
@@ -108,8 +151,6 @@ app.post('/user/post/todo', (req, res) => {
     });
   });
 });
-
-
 // delete todo
 app.delete('/user/delete/todo/:email/:id', (req, res) => {
   console.log(req.params);
@@ -123,5 +164,4 @@ app.delete('/user/delete/todo/:email/:id', (req, res) => {
     })
   })
 })
-
 */

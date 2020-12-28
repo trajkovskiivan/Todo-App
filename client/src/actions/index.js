@@ -11,7 +11,7 @@ import history from '../history';
 
 
 export const logIn = (email, password) => async dispatch => {
-  const response = await todos.post('/auth', {email: email, password: password})
+  const response = await todos.post('/auth/get', {email: email, password: password})
   // console.log(response)
   // console.log(response.data)
   if (response.data === null) {
@@ -21,7 +21,6 @@ export const logIn = (email, password) => async dispatch => {
     dispatch({type: LOG_IN, payload: response.data})
   }
 };
-
 export const logOut = (userId) => {
   localStorage.clear();
   return {

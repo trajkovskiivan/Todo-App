@@ -8,13 +8,13 @@ const userName = 'John';
 const anotherTodo = {title: 'This is the second todo', body: 'We are making sure that the update works'};
 
 let user = new User({
-  firstName: 'Dave',
-  lastName: 'Moon',
-  email: 'test2@test.com',
-  password: 'test',
-  age: 40,
-  userId: 'specialId',
-  todos: [{title: 'First ToDo for Dave', body: 'Make this App work...'}]
+  "firstName": "Dave",
+  "lastName": "Moon",
+  "email": "test2@test.com",
+  "password": "test",
+  "age": 40,
+  "userId": "specialId",
+  "todos": [{title: "First ToDo for Dave", body: "Make this App work..."}]
 });
 
 
