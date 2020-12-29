@@ -64,6 +64,8 @@ class Auth extends Component {
             onChange={(e) => this.handleInput(e)}
           />
           <Button variant='contained' color='secondary' onClick={() => this.handlePost()}>Log In</Button>
+          <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+
         </React.Fragment >
       )
     }

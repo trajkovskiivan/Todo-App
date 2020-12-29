@@ -63,7 +63,7 @@ class TodoInput extends Component {
           <br />
           <br />
           {/* <Button type="submit" variant='contained' color='primary' >Add Todo</Button> */}
-          <Button variant='contained' color='primary' onClick={() => this.handlePost()} >Click Me</Button>
+          <Button variant='contained' color='primary' onClick={() => this.handlePost()} >Add Todo</Button>
         </form>
       </div>
     );

@@ -11,18 +11,17 @@ const auth_index = (req, res) => {
 };
 
 const auth_create = (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   const {email} = req.body;
   // res.send(req.body)
   User.findOne({email: email}).then(record => {
     if (record) {
-      let status = false;
-      res.send(status);
+      res.send(false);
     } else {
       let user = new User(req.body);
       user.save().then(record => {
         console.log(`User ${record.firstName} is saved`)
-        res.send(record)
+        res.send(true)
       });
     };
   });

@@ -90,7 +90,7 @@ app.post('/auth/get', (req, res) => {
 });
 // create user
 app.post('/auth/create', (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   const {email} = req.body;
   // res.send(req.body)
   User.findOne({email: email}).then(record => {
